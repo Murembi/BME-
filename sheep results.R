@@ -1,0 +1,22 @@
+fold <- "C:/Users/murem/OneDrive/Desktop/BME/Datasets"
+setwd(fold)
+getwd()
+sheep <- read.table("Sheep.txt", header=T)
+head(sheep)
+is.numeric(sheep$DURATION)
+is.numeric(sheep$DURATION)
+is.factor(sheep$SEX)
+sheep$SEX <- as.factor(sheep$SEX)
+is.factor(sheep$SHEEP)
+sheep$SHEEP <- as.factor(sheep$SHEEP)
+is.factor(sheep$OBSPER)
+sheep$OBSPER <- as.factor(sheep$OBSPER)
+summary(sheep)
+sheep$LUPRATE <- sheep$NLOOKUPS/ sheep$DURATION
+#To calculate the new variable LUPRATE (lookup rate) by dividing NLOOKUPS by DURATION
+summary(sheep)
+head(sheep)
+mod1 <- lm(LUPRATE ~ OBSPER + SEX, data=sheep)
+library(car)
+Anova(mod1)
+summary(mod1)
