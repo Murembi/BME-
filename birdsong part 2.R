@@ -1,0 +1,11 @@
+fold <- "C:/Users/murem/OneDrive/Desktop/BME/Datasets"
+setwd(fold)
+getwd()
+birdsong <- read.table("Birdsong_all.txt", header=T)
+head(birdsong)
+summary(birdsong)
+birdsong$YEAR <- as.factor(birdsong$YEAR)
+summary(birdsong)
+mod1 <- lm(YOUNG ~ SONGDAY + YEAR, data=birdsong)
+Anova(mod1)
+summary(mod1)
