@@ -1,0 +1,56 @@
+# 🧬 RNA-Seq Differential Expression and Pathway Analysis Pipeline (R-based)
+
+This project contains an RNA-Seq analysis pipeline written in R for processing transcript quantification data, performing differential expression analysis, and visualizing enriched biological pathways using KEGG.
+
+---
+
+## 🔧 Tools and Packages Used
+
+- **R & Bioconductor packages**
+  - `tximport`, `GenomicFeatures`, `DESeq2`, `AnnotationDbi`, `org.Hs.eg.db`
+  - `gage`, `pathview`, `gageData`
+  - `gplots`, `RColorBrewer`, `dplyr`
+
+---
+
+## 📁 Input Files
+
+- `quant.sf` files (from **Salmon**) for each sample
+- `samples.txt`: metadata file containing sample names and conditions
+- `chr22_genes.gtf`: GTF file used to create transcript-to-gene mapping
+
+---
+
+## 🧪 Workflow Overview
+
+1. **Set working directory and load libraries**
+2. **Create transcript-to-gene mapping** using GTF with `GenomicFeatures`
+3. **Load sample metadata** and point to Salmon quantification files
+4. **Import expression data** using `tximport`
+5. **Run differential expression analysis** with `DESeq2`
+6. **Data visualization**:
+   - Heatmap of sample distances
+   - PCA plot
+   - Volcano plot
+7. **Gene annotation** using `org.Hs.eg.db`
+8. **Pathway enrichment analysis** with `gage`
+9. **Pathway visualization** using `pathview`
+
+---
+
+## 📊 Output
+
+- Normalized gene expression matrix
+- List of differentially expressed genes
+- Volcano plot and sample clustering heatmap
+- Annotated DE results (with gene names, symbols, and Entrez IDs)
+- KEGG pathway enrichment results and diagrams
+
+---
+
+## 📌 Example Code Snippets
+
+```r
+dds <- DESeqDataSetFromTximport(txi.salmon, samples, ~condition)
+dds <- DESeq(dds)
+res <- results(dds)
